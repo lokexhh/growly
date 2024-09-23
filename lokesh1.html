@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+    <title>Growly</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .header, .trusted, .features, .pricing, .integrations, .newsletter, .footer { padding: 50px; text-align: center; }
+        .header { background-color: #2b3a42; color: white; padding: 10px 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color: white; }
+        .navbar img { height: 40px; }
+        .navbar ul { list-style: none; display: flex; gap: 20px; }
+        .navbar ul li { display: inline; }
+        .navbar ul a { color: black;text-decoration: none; font-size: 16px;}
+        .navbar ul a:hover { text-decoration: underline;}
+        .navbar ul.dropdown {position: relative; display: inline-block;}
+        .navbar ul .dropdown-content { display: none; position: absolute; background-color: white; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1;}
+        .navbar ul.dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block}
+        .navbar ul.dropdown-content a:hover {background-color: #f1f1f1;}
+        .navbar ul.dropdown:hover .dropdown-content {display: block;}
+        .navbar .auth-buttons { display: flex; gap: 10px;}
+        .navbar .auth-buttons .sign-in { background-color: #F5F5F5; border: 1px solid #E0E5E3; padding: 10px 20px; text-decoration: none; 
+            color: black; border-radius: 4px;}
+        .box{background-color: #F5F5F5; border: 1px solid #E0E5E3; padding: 10px 20px; text-decoration: none; 
+            color: black; border-radius: 4px;}
+        .navbar .auth-buttons .get-started { background-color: #C4F000; border: none; padding: 10px 20px; text-decoration: none; color: black; border-radius: 4px;}
+        .navbar ul li a, .footer a { text-decoration: none; color: #2b3a42; font-weight: 600; }
+        .watch-tour {margin-top: 20px; display: flex; align-items: center; font-size: 18px; color: #333333;}
+        .watch-tour i {margin-right: 10px;}
+        .hero .cta, .features .cta, .pricing .cta, .newsletter .cta { background-color: #b8e986; padding: 10px 20px; border-radius: 5px; color: #2b3a42; text-decoration: none; font-weight: 600; }
+        .hero { display: flex; justify-content: space-between; align-items: center; background-color: white; }
+        .hero .text { max-width: 50%; }
+        .hero .text h1 { font-size: 48px; margin: 0; }
+        .hero .text p { font-size: 18px; color: #666; }
+        .position-tracking .visibility {font-size: 24px; margin-top: 10px;}
+        .position-tracking .graph {margin-top: 10px;}
+        .review{background-color: darkgreen;border: padding : 10px 20px ; text-decoration: none; color: white; border-radius: 4px;}
+
+        .hero .stats { display: flex; gap: 20px; }
+        .hero .stats .stat { background-color: #f5f5f5; padding: 20px; border-radius: 10px; text-align: center; }
+        .hero .stats .stat h2 { margin: 0; font-size: 24px; }
+        .hero .stats .stat p { margin: 0; color: #666; }
+        .special-item{background-color: darkgreen;}
+        .chart{width: 200px; height: 150px;
+        border-radius: 50%; background: conic-gradient(rgb(234, 236, 234)40%, rgb(127, 223, 127)23%, rgb(33, 158, 33)20%, rgb(9, 129, 9)47%);}
+        .trusted img, .integrations img { height: 40px; margin: 0 20px; }
+        .features h2, .pricing h2, .integrations h2, .newsletter h2 { font-size: 32px; margin: 0 0 20px; }
+        .features .feature, .pricing .plans { display: flex; justify-content: center; gap: 20px; }
+        .features .feature { align-items: center; margin: 20px 0;background-color: white; }
+        .features .feature img { height: 200px; }
+        .features .feature .text { max-width: 50%; text-align: left; }
+        .features .feature .text h3 { font-size: 24px; margin: 0 0 10px; }
+        .features .feature .text p { color:black ; }
+        .pricing .plan { background-color: white; padding: 20px; border-radius: 10px; text-align: left; width: 300px; }
+        .pricing .plan h3 { font-size: 24px; margin: 0 0 10px; }
+        .pricing .plan p { color: #666; }
+        .pricing .plan .price { font-size: 32px; margin: 20px 0; }
+        .newsletter { background-color: #2b3a42; color: white; }
+        .newsletter input { padding: 10px; border-radius: 5px; border: none; margin-right: 10px; }
+        .footer { background-color: #f5f5f5; }
+        .footer .sitemap { display: flex; justify-content: center; gap: 50px; margin: 20px 0; }
+        .footer .sitemap ul { list-style: none; padding: 0; }
+        .footer .sitemap ul li { margin: 5px 0; }
+        .footer .social i { margin: 0 10px; color: #2b3a42; }
+        .footer .copyright { color: #666; }
+        .ex1{ padding-right: 1px; text-align: right; }
+        
+    </style>
+</head>
+<body>
+    <div class="header"><p>&#128176;Save 20% on your first year. <a href="#">Start free trial</a> </p></div>
+    <div class="navbar">
+        <div class="ex1"></div>
+        <img src="/python/favicon.jpg" alt="Growly Logo" width="40" height="40"/>
+        <h1>Growly</h1>
+        <ul>
+            <li><a href="#">Platform</a></li>
+            <li><a href="#">customer stories</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Company</a></li>
+        </ul>
+        <div class="auth-buttons">
+        <a class="sign-in" href="#">Sign in</a>
+        <a class="get-started" href="#">Get Started</a>
+        </div>
+    </div>
+    <div class="hero">
+        <div class="text">
+            <div class="sign-in"><small>|For Smart Investor</small></div>
+            <h1>Increase Leads from Search</h1>
+            <p>The organic marketing platform for enterprise B2B. Optimize your website team.</p>
+            <a class="box" href="#">Enter Your  Email</a>
+            <a class="cta" href="#">Get Started</a>
+        <div class="watch-tour">
+        <a href="#">Watch product tour</a>
+        </div>
+        </div>
+        <div>
+            <div  id="myplot" style="width: 200px;" "height: 150px"></div>
+            <div class="chart">
+                <img src="/python/chart.png" alt ="Chart" width="200px" height="150px"/>
+
+            </div>
+                
+            <div class="position-tracking">
+                <div class="visibility">
+                 Visibility 12.5%
+                </div>
+                <div class="graph">
+                <img src="/python/graph.jpg"  alt="graph"  height="150"/>
+                </div>
+                </div>
+            </div>
+            <div>
+                <img src="/python/client.jpg" alt="piece chart" width="250" height="250"/>
+            <div class="review">
+                <b>4.9</b>
+                <h3>Overall client rate</h3>
+                <p>more than <u>10k review</u></p>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="trusted">
+        <h3>Trusted by Thousand Top Brands</h3>
+        <img src="/python/images (1).png"alt="Descript Logo" width="100" height="40"/>
+        <img src="/python/images.jpg" alt="Slack Logo" width="100" height="40"/>
+        <img src="/python/download (3).png" alt="Hotjar Logo" width="100" height="40"/>
+        <img src="/python/download (2).png" alt="Segment Logo" width="100" height="40"/>
+        <img src="/python/download (1).png" alt="Square Logo" width="100" height="40"/>
+        <img src="/python/download.png" alt="Lattice Logo" width="100" height="40"/>
+    </div>
+    <div class="features">
+            <div class="feature">
+            <div class="text">
+                <h1>The organic marketing platform for enterprise teams</h1>
+                <div class="navbar">
+                    <ul>
+                        <li><h3 href="#">Create Wining Content </h3></li>
+                        <li class="special-item"><h3 href="#">Research Keywords</h3></li>
+                        <li><h3 href="#">Track keyword Rankings</h3></li>
+                        <li><h3 href="#">Measure performance</h3></li>
+                    </ul>
+                </div>
+    <div class="review">               
+    <div class="container">
+        <div class="content">
+            <table>
+                <thread>
+                    <tr>
+                        <th><h1>Research Keywords</h1></th>
+                        <th bgcolor="smokewhite"><h1>Track keyword Rankings</h1></th>
+                    </tr>
+                </thread>
+                <tbody>
+                    <tr>
+                    <td><p>Uncover customer intent across search and social and identify new ways to rank with our index of 20+ billion keywords. Investigate competitor strategies to stay ahead.</p></td>
+                    </tr>
+                </tbody>
+        </div>
+        <div class="search-box">
+            <div class="header">
+                <input type="text" placeholder="Standing desk">
+                        <button><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <tbody>
+                        <tr>
+                            <td><a href="#" class="learn-more">Learn More</a></td>
+                    <td bgcolor="smokewhite"><h2>246K</h2></td>
+                    <td bgcolor="smokewhite"><h2>10.4K</h2></td>
+                    
+                        </tr>
+                </div>
+                <div class="stat">
+                    <tr>
+                        <td></td>
+                    <td bgcolor="smokewhite"><p>Monthly Search Interest</p></td>
+                    <td bgcolor="smokewhite"><p>Daily Social Mentions</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+            <div class="keywords">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Keyword</th>
+                            <th>Mentions</th>
+                            <th>Engagement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Standing</td>
+                            <td>5.8K</td>
+                            <td>213.6K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        <div class="pricing">
+            <h1>Simple & Transparent</h1>
+            <a> Try Growly Premium for free for 7 days</a>
+            <a>then choose between the monthly or annual plan</a>
+            <div class="plans">
+                <div class="plan">
+                    <h3>Pro</h3>
+                    <p>Best for any business</p>
+                    <p class="price">$14.99</p>
+                    <a class="cta" href="#">Subscribe</a>
+                </div>
+                <div class="plan">
+                    <h3>Business</h3>
+                    <p>Best for any business</p>
+                    <p class="price"> $99.99</p>
+                    <a class="cta" href="#">Subscribe</a>
+                </div>
+            </div>
+        </div>
+        <div class="integrations">
+            <h2>Integrate with your entire tech stack</h2>
+            <div class="logos">
+             <img alt="Shopify Logo" height="100" src="/python/Shopify Logo.webp" width="100"/>
+             <img alt="Notion Logo" height="100" src="/python/notion.png" width="100"/>
+             <img alt="Google Ads Logo" height="100" src="/python/Google Ads Logo.png" width="100"/>
+             <img alt="Zapier Logo" src="/python/Zapier Logo.png"  width="100" height="100"/>
+             <img alt="Microsoft Teams Logo" height="100" src="/python/Microsoft_Teams-Logo.wine.png" width="100"/>
+             <img alt="Google Analytics Logo"  src="/python/Google-Analytics-Logo-2013-2015.png" width="100" height="100"/>
+             <img alt="Trello Logo"  src="/python/Trello.png" width="100" height="100"/>
+             <img alt="asana logo" src="/python/Asana Logo.jpg" width="100" height="100"/>
+            </div>
+           </div>
+           <div class="news">
+            <h2>Get the latest news and tips for businesses</h2>
+            <div class="navbar">
+             <div class="sign-in">
+              <h3>Share Research Insights By Date &amp; Leverage Service</h3>
+              <p>Read more</p>
+             </div>
+             <div class="sign-in">
+              <h3>New AI Writing Assistant &amp; Seamless Login Experience in Growly</h3>
+              <p>Read more</p>
+             </div>
+             <div class="sign-in">
+              <h3>January 2024 SEO Industry Updates</h3>
+              <p>Read more</p>
+             </div>
+            </div>
+           </div>
+           <div class="header">
+            <h2>Ready to unlock your website's potential?</h2>
+            <a class="cta" href="#">Get Started</a>
+           </div>
+           <div class="footer">
+            <div class="sitemap">
+             <a href="#">Platform</a>
+             <a href="#">Solutions</a>
+             <a href="#">Resources</a>
+             <a href="#">Company</a>
+            </div>
+            <div class="social">
+             <a href="#"><i class="fab fa-facebook"></i></a>
+             <a href="#"><i class="fab fa-twitter"></i></a>
+             <a href="#"><i class="fab fa-linkedin"></i></a>
+             <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p> © 2023 Growly. All rights reserved.</p>
+        </div>
+    </body>
+</html>
+
+        
